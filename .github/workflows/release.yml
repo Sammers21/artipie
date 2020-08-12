@@ -22,7 +22,6 @@ jobs:
         run: |
           export REPORT=${{ steps.run_benchmarks.outputs.report }}
           export VERSION=${{ env.RELEASE_VERSION }}
-          git checkout gh-pages
           mkdir -p benchmarks/$VERSION
           mv $REPORT benchmarks/$VERSION/report.json
           git add benchmarks/$VERSION/report.json
