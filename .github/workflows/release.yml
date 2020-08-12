@@ -1,31 +1,9 @@
 name: Docker Release and Run Benchmarks
 on:
-  create:
-    tags:
-      - .*
+  push:
+    branches:
+      - "master"
 jobs:
-  docker-publish:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set env
-        run: echo ::set-env name=RELEASE_VERSION::${GITHUB_REF:10}
-      - name: Publish Image to Docker Registry
-        uses: elgohr/Publish-Docker-Github-Action@2.19
-        with:
-          name: ${{ secrets.DOCKERHUB_REPO }}
-          username: ${{ secrets.DOCKERHUB_USER }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          cache: true
-          tags: "latest,${{ env.RELEASE_VERSION }}"
-      - name: Publish Image to Artipie Registry
-        uses: elgohr/Publish-Docker-Github-Action@2.19
-        with:
-          name: central.artipie.com/artipie/docker
-          username: ${{ secrets.ARTIPIE_USERNAME }}
-          password: ${{ secrets.ARTIPIE_PASSWORD }}
-          cache: true
-          tags: "latest,${{ env.RELEASE_VERSION }}"
   run-benchmarks:
     runs-on: ubuntu-latest
     needs: docker-publish
@@ -40,7 +18,7 @@ jobs:
         with:
           aws-access-key: '${{ secrets.PERF_AWS_ACCESS_KEY }}'
           aws-secret-key: '${{ secrets.PERF_AWS_SECRET_KEY }}'
-          version: '${{ env.RELEASE_VERSION }}'
+          version: 'latest'
       - name: Commit benchmark results
         run: |
           export REPORT=${{ steps.run_benchmarks.outputs.report }}
