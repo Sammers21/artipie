@@ -13,7 +13,7 @@ jobs:
         run: echo ::set-env name=RELEASE_VERSION::${GITHUB_REF:10}
       - name: Run benchmarks
         id: run_benchmarks
-        uses: artipie/benchmarks@master
+        uses: Sammers21/benchmarks@properly_repoted_docker_benchmarks
         with:
           aws-access-key: '${{ secrets.PERF_AWS_ACCESS_KEY }}'
           aws-secret-key: '${{ secrets.PERF_AWS_SECRET_KEY }}'
