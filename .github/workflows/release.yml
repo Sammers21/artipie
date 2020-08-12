@@ -13,7 +13,7 @@ jobs:
         run: echo ::set-env name=RELEASE_VERSION::${GITHUB_REF:10}
       - name: Run benchmarks
         id: run_benchmarks
-        uses: Sammers21/benchmarks@properly_repoted_docker_benchmarks
+        uses: Sammers21/benchmarks@imrpove
         with:
           aws-access-key: '${{ secrets.PERF_AWS_ACCESS_KEY }}'
           aws-secret-key: '${{ secrets.PERF_AWS_SECRET_KEY }}'
@@ -24,8 +24,8 @@ jobs:
           export VERSION=${{ env.RELEASE_VERSION }}
           git checkout gh-pages
           mkdir -p benchmarks/$VERSION
-          mv $REPORT benchmarks/$VERSION/$REPORT
-          git add benchmarks/$VERSION/$REPORT
+          mv $REPORT benchmarks/$VERSION/report.json
+          git add benchmarks/$VERSION/report.json
           git commit -m "Add benchmark results"
       - name: Push benchmark results
         uses: ad-m/github-push-action@master
