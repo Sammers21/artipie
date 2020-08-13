@@ -21,12 +21,13 @@ jobs:
       - name: Commit benchmark results
         run: |
           pwd
-          export REPORT=${{ steps.run_benchmarks.outputs.report }}
-          export VERSION=${{ env.RELEASE_VERSION }}
-          mkdir -p benchmarks/$VERSION
-          sudo mv $REPORT benchmarks/$VERSION/report.json
-          git add benchmarks/$VERSION/report.json
-          git commit -m "Add benchmark results"
+          cat report/benchmark-results.json
+      #          export REPORT=${{ steps.run_benchmarks.outputs.report }}
+      #          export VERSION=${{ env.RELEASE_VERSION }}
+      #          mkdir -p benchmarks/$VERSION
+      #          sudo mv $REPORT benchmarks/$VERSION/report.json
+      #          git add benchmarks/$VERSION/report.json
+      #          git commit -m "Add benchmark results"
       - name: Push benchmark results
         uses: ad-m/github-push-action@master
         with:
