@@ -29,6 +29,7 @@ jobs:
           mv $REPORT benchmarks/$VERSION/
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+          git checkout gh-pages
           git add benchmarks/$VERSION/$REPORT
           git commit -m "Add benchmark results for version=$VERSION"
       - name: Push benchmark results
