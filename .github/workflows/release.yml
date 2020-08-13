@@ -20,6 +20,7 @@ jobs:
           version: 'latest'
       - name: Commit benchmark results
         run: |
+          apt update && apt install tree
           tree /benchmarks/
           tree ./
           export REPORT=${{ steps.run_benchmarks.outputs.report }}
