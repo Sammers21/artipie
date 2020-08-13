@@ -20,14 +20,15 @@ jobs:
           version: 'latest'
       - name: Commit benchmark results
         run: |
+          set -x
           pwd
-          cat report/benchmark-results.json
-      #          export REPORT=${{ steps.run_benchmarks.outputs.report }}
-      #          export VERSION=${{ env.RELEASE_VERSION }}
-      #          mkdir -p benchmarks/$VERSION
-      #          sudo mv $REPORT benchmarks/$VERSION/report.json
-      #          git add benchmarks/$VERSION/report.json
-      #          git commit -m "Add benchmark results"
+          export REPORT=${{ steps.run_benchmarks.outputs.report }}
+          cat $REPORT
+          export VERSION=0.9
+          mkdir -p benchmarks/$VERSION
+          mv $REPORT benchmarks/$VERSION/
+          git add benchmarks/$VERSION/$REPORT
+          git commit -m "Add benchmark results for version=$VERSION"
       - name: Push benchmark results
         uses: ad-m/github-push-action@master
         with:
