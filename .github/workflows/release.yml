@@ -24,7 +24,7 @@ jobs:
           export REPORT=${{ steps.run_benchmarks.outputs.report }}
           export VERSION=${{ env.RELEASE_VERSION }}
           mkdir -p benchmarks/$VERSION
-          mv $REPORT benchmarks/$VERSION/report.json
+          sudo mv $REPORT benchmarks/$VERSION/report.json
           git add benchmarks/$VERSION/report.json
           git commit -m "Add benchmark results"
       - name: Push benchmark results
