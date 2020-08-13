@@ -26,7 +26,7 @@ jobs:
           pwd
           export REPORT=${{ steps.run_benchmarks.outputs.report }}
           cat $REPORT
-          export VERSION=0.9
+          export VERSION=${{ env.RELEASE_VERSION }}
           mkdir -p benchmarks/$VERSION
           mv $REPORT benchmarks/$VERSION/
           git config --local user.email "action@github.com"
