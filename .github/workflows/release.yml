@@ -20,9 +20,7 @@ jobs:
           version: 'latest'
       - name: Commit benchmark results
         run: |
-          sudo apt-get update && sudo apt-get install tree
-          tree /benchmarks/
-          tree ./
+          pwd
           export REPORT=${{ steps.run_benchmarks.outputs.report }}
           export VERSION=${{ env.RELEASE_VERSION }}
           mkdir -p benchmarks/$VERSION
