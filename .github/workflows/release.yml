@@ -1,8 +1,8 @@
 name: Docker Release and Run Benchmarks
 on:
-  push:
-    branches:
-      - "master"
+  create:
+    tags:
+      - .*
 jobs:
   run-benchmarks:
     runs-on: ubuntu-latest
@@ -19,7 +19,7 @@ jobs:
         with:
           aws-access-key: '${{ secrets.PERF_AWS_ACCESS_KEY }}'
           aws-secret-key: '${{ secrets.PERF_AWS_SECRET_KEY }}'
-          version: 'latest'
+          version: '${{ env.RELEASE_VERSION }}'
       - name: Commit benchmark results
         run: |
           set -x
