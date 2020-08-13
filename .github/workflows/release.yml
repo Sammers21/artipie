@@ -9,6 +9,8 @@ jobs:
     steps:
       - name: Check out the code
         uses: actions/checkout@v2
+        with:
+          ref: gh-pages
       - name: Set env
         run: echo ::set-env name=RELEASE_VERSION::${GITHUB_REF:10}
       - name: Run benchmarks
@@ -29,11 +31,9 @@ jobs:
           mv $REPORT benchmarks/$VERSION/
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git checkout gh-pages
           git add benchmarks/$VERSION/$REPORT
           git commit -m "Add benchmark results for version=$VERSION"
       - name: Push benchmark results
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: 'gh-pages'
