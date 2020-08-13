@@ -20,6 +20,8 @@ jobs:
           version: 'latest'
       - name: Commit benchmark results
         run: |
+          tree /benchmarks/
+          tree ./
           export REPORT=${{ steps.run_benchmarks.outputs.report }}
           export VERSION=${{ env.RELEASE_VERSION }}
           mkdir -p benchmarks/$VERSION
